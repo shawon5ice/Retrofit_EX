@@ -7,9 +7,20 @@
 
     </data>
 
-    <FrameLayout
-        android:id="@+id/mainActivityFragContainer"
+<!--    <FrameLayout-->
+<!--        android:id="@+id/mainActivityFragContainer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<!--    </FrameLayout>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/single_job_item"
+        tools:itemCount="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </layout>

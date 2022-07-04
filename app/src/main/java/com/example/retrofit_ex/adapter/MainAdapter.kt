@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.retrofit_ex.R
 import com.example.retrofit_ex.databinding.SingleJobItemBinding
-import com.example.retrofit_ex.models.CustomJob
 import com.example.retrofit_ex.models.JobResponse
 
 
@@ -20,7 +19,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             itemView.setOnClickListener { listener.onItemClick(adapterPosition) }
         }
     }
-    var jobs = ArrayList<CustomJob>()
+    var jobs = ArrayList<JobResponse.Data>()
 
     private lateinit var mListener :onItemClickListener
 
@@ -32,10 +31,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     fun setOnClickListener(listener: onItemClickListener){
         mListener = listener
     }
-    fun setJobList(jobs: ArrayList<CustomJob>) {
-        this.jobs = jobs
-        notifyDataSetChanged()
-    }
+//    fun setJobList(jobs: ArrayList<CustomJob>) {
+//        this.jobs = jobs
+//        notifyDataSetChanged()
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflater = LayoutInflater.from(parent.context)

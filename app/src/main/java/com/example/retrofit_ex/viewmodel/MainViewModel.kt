@@ -13,18 +13,18 @@ import kotlin.coroutines.coroutineContext
 
 class MainViewModel constructor(private val repository: MainRepository)  : ViewModel() {
 
-    val jobResponse = MutableLiveData<List<JobResponse.Data>>()
+    val jobResponse = MutableLiveData<JobResponse>()
     val errorMessage = MutableLiveData<String>()
 
     fun getJobs() {
         val response = repository.getJobResponse()
-        response.enqueue(object : Callback<List<JobResponse.Data>> {
-            override fun onResponse(call: Call<List<JobResponse.Data>>, response: Response<List<JobResponse.Data>>) {
-                //jobResponse.postValue(response.body()?.data)
-                
+        response.enqueue(object : Callback<JobResponse> {
+            override fun onResponse(call: Call<JobResponse>,
+                                    response: Response<JobResponse>) {
+
                 jobResponse.postValue(response.body())
             }
-            override fun onFailure(call: Call<List<JobResponse.Data>>, t: Throwable) {
+            override fun onFailure(call: Call<JobResponse>, t: Throwable) {
                 errorMessage.postValue(t.message)
             }
         })
