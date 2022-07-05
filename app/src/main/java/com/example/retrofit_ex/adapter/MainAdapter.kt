@@ -47,7 +47,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         Glide.with(holder.itemView.context).load(job.logo).into(holder.binding.logo)
 
         val datePart = job.jobDetails.lastDate.split(" ").toTypedArray()
-        holder.binding.deadline.text = datePart[0]+" " + datePart[1].subSequence(0,3)+" " + datePart[2]
+        holder.binding.deadline.text = datePart[0]+" " + datePart[1]+", " + datePart[2]
         holder.setIsRecyclable(false)
         holder.binding.companyName.text = job.recruitingCompanysProfile
         if(job.isFeatured){
