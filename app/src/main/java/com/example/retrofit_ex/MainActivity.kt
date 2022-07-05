@@ -3,6 +3,7 @@ package com.example.retrofit_ex
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.example.retrofit_ex.adapter.MainAdapter
@@ -20,36 +21,27 @@ class MainActivity : AppCompatActivity() {
     private val retrofitService = RetrofitService.getInstance()
     val adapter = MainAdapter()
 
+    companion object {
+        lateinit var fragmentManger: FragmentManager
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        savedInstanceState?.putString("Hello", "SaveIt")
         setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fragmentManger = supportFragmentManager
 
-        binding.recyclerview.adapter = adapter
-//        val homeFragment = HomePage()
+        val homeFragment = HomePage()
 
-//        if(savedInstanceState == null) { // initial transaction should be wrapped like this
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.mainActivityFragContainer, homeFragment)
-//                .addToBackStack(null)
-//                .commitAllowingStateLoss()
-//        }
-
-        binding.recyclerview.adapter = adapter
-
-        var data : ArrayList<JobResponse.Data> = ArrayList()
-
-        viewModel = ViewModelProvider(this, ViewModelFactory(MainRepository(retrofitService)))
-            .get(MainViewModel::class.java)
-        viewModel.jobResponse.observe(this) {
-            Log.d("res", "onCreate: $it")
+        if(savedInstanceState == null) { // initial transaction should be wrapped like this
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.mainActivityFragContainer, homeFragment)
+                .addToBackStack(null)
+                .commitAllowingStateLoss()
         }
-        viewModel.errorMessage.observe(this) {
-        }
-        adapter.jobs = data
-        viewModel.getJobs()
+
+
 
 
     }
