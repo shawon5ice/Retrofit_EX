@@ -34,6 +34,7 @@
                tools:text="SW eng." />
 
            <TextView
+               android:layout_marginBottom="5dp"
                android:id="@+id/companyName"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -57,14 +58,15 @@
                android:src="@drawable/calender"
                android:layout_width="15dp"
                android:layout_height="15dp"/>
+
            <TextView
                android:id="@+id/deadline"
-               android:text="2nd june 2022"
-               android:layout_marginLeft="10dp"
-               android:layout_toRightOf="@+id/calender"
-               android:layout_below="@+id/companyName"
                android:layout_width="wrap_content"
-               android:layout_height="wrap_content">
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/companyName"
+               android:layout_marginLeft="5dp"
+               android:layout_toRightOf="@+id/calender"
+               android:text="2nd june 2022">
            </TextView>
        </RelativeLayout>
     </androidx.cardview.widget.CardView>
