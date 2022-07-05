@@ -44,6 +44,20 @@ data class JobResponse(
         @SerializedName("recruitingCompany'sProfile")
         val recruitingCompanysProfile: String
     ) : Parcelable {
+        constructor(parcel: Parcel) : this(
+            parcel.readString()!!,
+            parcel.readByte() != 0.toByte(),
+            TODO("jobDetails"),
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readInt(),
+            parcel.readString()!!,
+            parcel.readInt(),
+            parcel.readString()!!,
+            parcel.readString()!!
+        ) {
+        }
+
         data class JobDetails(
             @SerializedName("ApplyInstruction")
             val applyInstruction: String,
@@ -55,26 +69,20 @@ data class JobResponse(
             val title: String
         )
 
-        constructor(parcel: Parcel) : this(
-            parcel.readString().toString(),
-            parcel.readByte() != 0.toByte(),
-            TODO("jobDetails"),
-            parcel.readString().toString(),
-            parcel.readString().toString(),
-            parcel.readInt(),
-            parcel.readString().toString(),
-            parcel.readInt(),
-            parcel.readString().toString(),
-            parcel.readString().toString()
-        ) {
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeString(deadline)
+            parcel.writeByte(if (isFeatured) 1 else 0)
+            parcel.writeString(jobTitle)
+            parcel.writeString(logo)
+            parcel.writeInt(maxExperience)
+            parcel.writeString(maxSalary)
+            parcel.writeInt(minExperience)
+            parcel.writeString(minSalary)
+            parcel.writeString(recruitingCompanysProfile)
         }
 
         override fun describeContents(): Int {
-            TODO("Not yet implemented")
-        }
-
-        override fun writeToParcel(dest: Parcel?, flags: Int) {
-            TODO("Not yet implemented")
+            return 0
         }
 
         companion object CREATOR : Parcelable.Creator<Data> {

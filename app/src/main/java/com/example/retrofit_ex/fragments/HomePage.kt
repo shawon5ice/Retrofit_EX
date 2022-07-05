@@ -6,17 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.retrofit_ex.Communicator
 import com.example.retrofit_ex.MainActivity
 import com.example.retrofit_ex.R
 import com.example.retrofit_ex.adapter.MainAdapter
 import com.example.retrofit_ex.api.RetrofitService.Companion.retrofitService
+import com.example.retrofit_ex.databinding.FragmentDetailBinding
+import com.example.retrofit_ex.databinding.FragmentHomePageBinding
 import com.example.retrofit_ex.models.JobResponse
 import com.example.retrofit_ex.repository.MainRepository
 import com.example.retrofit_ex.viewmodel.MainViewModel
@@ -27,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 class HomePage : Fragment() {
 
     lateinit var viewModel: MainViewModel
+    lateinit var communicator: Communicator
 
     val adapter = MainAdapter()
 
@@ -36,17 +40,23 @@ class HomePage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_home_page, container, false)
+        val binding: FragmentHomePageBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_home_page, container, false
+        )
+        val view: View = binding.root
 
-        view.findViewById<RecyclerView>(R.id.recyclerview).layoutManager = LinearLayoutManager(activity)
+        communicator = activity as Communicator
 
-        view.findViewById<RecyclerView>(R.id.recyclerview).adapter = adapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(activity)
+
+        binding.recyclerview.adapter = adapter
 
         var data : ArrayList<JobResponse.Data> = ArrayList()
         adapter.jobs = data
 
         viewModel = ViewModelProvider(this, ViewModelFactory(MainRepository(retrofitService!!)))
             .get(MainViewModel::class.java)
+
         viewModel.jobResponse.observe(viewLifecycleOwner) {
             if(it!=null){
                 view.findViewById<ProgressBar>(R.id.progressBar).visibility = View.INVISIBLE
@@ -65,29 +75,11 @@ class HomePage : Fragment() {
 
         adapter.setOnClickListener(object : MainAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
-                val fragment = DetailFragment(); //Your Fragment
-                val bundle = Bundle()
-
-                bundle.putParcelable("jobInfo", data[position])  // Key, value
-                fragment.setArguments(bundle);
-                replaceFragment(MainActivity.fragmentManger,fragment)
-
+                communicator.passJobData(data[position])
             }
 
         })
         return view
     }
-
-    fun replaceFragment(manager: FragmentManager, fragment: Fragment) {
-        val backStateName = fragment.javaClass.name
-        val fragmentPopped: Boolean = manager.popBackStackImmediate(backStateName, 0)
-        if (!fragmentPopped) { //fragment not in back stack, create it.
-            val ft: FragmentTransaction = manager.beginTransaction()
-            ft.replace(com.example.retrofit_ex.R.id.mainActivityFragContainer, fragment)
-            ft.addToBackStack(backStateName)
-            ft.commit()
-        }
-    }
-
 
 }

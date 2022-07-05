@@ -3,12 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/drawable/shape.xml" value="0.121" />
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/adapter_movie.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/fragment_home_page.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/single_job_item.xml" value="0.25" />
+        <entry key="..\:/Users/shawon/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout-v31/fragment_detail.xml" value="0.32051282051282054" />
+        <entry key="..\:/Users/shawon/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/design.xml" value="0.33" />
+        <entry key="..\:/Users/shawon/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/fragment_detail.xml" value="0.33" />
+        <entry key="..\:/Users/shawon/AndroidStudioProjects/Retrofit_EX/app/src/main/res/layout/fragment_home_page.xml" value="0.15830800405268491" />
       </map>
     </option>
   </component>
